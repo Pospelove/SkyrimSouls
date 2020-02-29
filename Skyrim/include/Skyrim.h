@@ -1,13 +1,6 @@
 #pragma once
 
 #ifdef _MSC_VER
-#  ifndef _LIB
-#    if _DEBUG
-#      pragma comment(lib, "Skyrim_d.lib")
-#    else
-#      pragma comment(lib, "Skyrim.lib")
-#    endif
-#  endif
 // 4018 - signed/unsigned mismatch
 // 4244 - loss of data by assignment
 // 4267 - possible loss of data (truncation)

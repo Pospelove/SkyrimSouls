@@ -16,11 +16,13 @@ public:
 
 protected:
 	// @override
-	virtual item_type* NewItem() override {
-		return (item_type*)m_kAllocator.Allocate();
+  virtual NiTMapItem<TKEY, TVAL>* NewItem() override
+  {
+    return (NiTMapItem<TKEY, TVAL>*)m_kAllocator.Allocate();
 	}
-	virtual void DeleteItem(item_type *item) override {
-		item->~item_type();
+  virtual void DeleteItem(NiTMapItem<TKEY, TVAL>* item) override
+  {
+          item->~NiTMapItem<TKEY, TVAL>();
 		m_kAllocator.Deallocate(item);
 	}
 };

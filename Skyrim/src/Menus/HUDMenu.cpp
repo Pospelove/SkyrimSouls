@@ -14,6 +14,10 @@ HUDObject::~HUDObject(void)
 		view->ForceCollectGarbage();
 }
 
+void HUDObject::Update(void)
+{
+}
+
 TESObjectREFR * EnemyHealth::GetTarget() const
 {
 	TESObjectREFR * refr = nullptr;
