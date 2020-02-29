@@ -56,19 +56,19 @@ public:
 				*((bool*)(menuControls->unk28) + 0x25) = true;
 
 				InputMappingManager* input = InputMappingManager::GetSingleton();
-				if (evn->menuName == holder->containerMenu 
-					|| evn->menuName == holder->barterMenu 
-					|| evn->menuName == holder->giftMenu 
-					|| evn->menuName == holder->inventoryMenu 
+				if (evn->menuName == holder->containerMenu
+					|| evn->menuName == holder->barterMenu
+					|| evn->menuName == holder->giftMenu
+					|| evn->menuName == holder->inventoryMenu
 					|| evn->menuName == holder->magicMenu)
 				{
 					input->DisableControl(InputMappingManager::ContextType::kContext_Gameplay);
 				}
 				if (unpausedCount++ == 0)
 				{
-					if (mm->IsMenuOpen(holder->dialogueMenu) && (evn->menuName == holder->containerMenu 
-						|| evn->menuName == holder->barterMenu 
-						|| evn->menuName == holder->giftMenu 
+					if (mm->IsMenuOpen(holder->dialogueMenu) && (evn->menuName == holder->containerMenu
+						|| evn->menuName == holder->barterMenu
+						|| evn->menuName == holder->giftMenu
 						|| evn->menuName == holder->trainingMenu))
 					{
 						GFxMovieView* view = mm->GetMovieView(holder->dialogueMenu);
@@ -103,7 +103,7 @@ public:
 
 						if (settings.m_fadeOutDist >= iActivateDist && ref->Is(FormType::Character) && !ref->IsDead(false) && lootMode == 2)
 						{
-							auto fn = [=]()->bool 
+							auto fn = [=]()->bool
 							{
 								UIStringHolder* holder = UIStringHolder::GetSingleton();
 								MenuManager* mm = MenuManager::GetSingleton();
@@ -127,10 +127,10 @@ public:
 			else
 			{
 				InputMappingManager* input = InputMappingManager::GetSingleton();
-				if (evn->menuName == holder->containerMenu 
-					|| evn->menuName == holder->barterMenu 
-					|| evn->menuName == holder->giftMenu 
-					|| evn->menuName == holder->inventoryMenu 
+				if (evn->menuName == holder->containerMenu
+					|| evn->menuName == holder->barterMenu
+					|| evn->menuName == holder->giftMenu
+					|| evn->menuName == holder->inventoryMenu
 					|| evn->menuName == holder->magicMenu)
 				{
 					input->EnableControl(InputMappingManager::ContextType::kContext_Gameplay);
@@ -239,7 +239,7 @@ bool __stdcall Hook_AddUIMessage(const BSFixedString& strData, UInt32 msgID)
 
 
 class FavoritesMenu : public IMenu,
-					  public MenuEventHandler
+	public MenuEventHandler
 {
 public:
 
@@ -291,7 +291,7 @@ public:
 						EquipManager::GetSingleton()->EquipItem(g_thePlayer, objDesc, slot, true);
 						if (g_thePlayer->processManager != nullptr)
 						{
-							auto fn = [form]() 
+							auto fn = [form]()
 							{
 								g_thePlayer->processManager->UpdateEquipment(g_thePlayer);
 
@@ -345,8 +345,8 @@ static_assert(sizeof(FavoritesMenu) == 0x48, "sizeof(FavoritesMenu) != 0x48");
 
 
 class BookMenu : public IMenu,
-				 public SimpleAnimationGraphManagerHolder,
-				 public BSTEventSink<BSAnimationGraphEvent>
+	public SimpleAnimationGraphManagerHolder,
+	public BSTEventSink<BSAnimationGraphEvent>
 {
 public:
 
@@ -377,7 +377,7 @@ public:
 	public:
 		TES_FORMHEAP_REDEFINE_NEW();
 
-		BookContentUpdater(bool direction) : m_direction(direction){}
+		BookContentUpdater(bool direction) : m_direction(direction) {}
 
 		virtual void Run() override
 		{
@@ -422,7 +422,7 @@ public:
 					{
 						bookMenu->TurnPage(direction);
 					}
-					else if(!(bookMenu->flags & IMenu::kType_PauseGame))
+					else if (!(bookMenu->flags & IMenu::kType_PauseGame))
 					{
 						const SKSEPlugin *plugin = SKSEPlugin::GetSingleton();
 						const SKSETaskInterface *task = plugin->GetInterface(SKSETaskInterface::Version_2);
@@ -573,7 +573,7 @@ public:
 		{
 			this->SetBookText();
 
-			auto fn = [](){
+			auto fn = []() {
 				UIStringHolder* stringHolder = UIStringHolder::GetSingleton();
 				MenuManager* mm = MenuManager::GetSingleton();
 				if (mm->IsMenuOpen(stringHolder->bookMenu))
@@ -630,23 +630,23 @@ public:
 	}
 
 	//members:
-	UInt32					unk2C;					
+	UInt32					unk2C;
 	UInt32					unk30;
 	UInt32					unk34;
-	GFxMovieView*			bookView;				
-	NiAVObject*				unk3C;					
-	UInt32					unk40;				
-	UInt32					unk44;				
-	UInt32					unk48;					
-	UInt32					unk4C;				
-	NiSourceTexture*		unk50;				
-	NiTriShape*				unk54;					
-	UInt16					unk58;					
-	UInt16					refreshTimes;		
-	UInt8					disableCloseMsg;		
-	bool					isNote;					
-	bool					isInit;					
-	UInt8					padding;		
+	GFxMovieView*			bookView;
+	NiAVObject*				unk3C;
+	UInt32					unk40;
+	UInt32					unk44;
+	UInt32					unk48;
+	UInt32					unk4C;
+	NiSourceTexture*		unk50;
+	NiTriShape*				unk54;
+	UInt16					unk58;
+	UInt16					refreshTimes;
+	UInt8					disableCloseMsg;
+	bool					isNote;
+	bool					isInit;
+	UInt8					padding;
 
 	DEFINE_MEMBER_FN(InitBookMenu, void, 0x008451C0);
 	DEFINE_MEMBER_FN(CreateBookLayout, void, 0x00845F70);
@@ -705,13 +705,13 @@ public:
 			static const UInt32 kHook_SetLockInfo_Call = 0x0086FE10;
 
 			START_ASM(Hook_SetLockInfo, 0x0087053D, 0x00870549, 1);
-				add esp, 0xC
+			add esp, 0xC
 				lea ecx, [esp + 0x38]
-				call [kHook_SetLockInfo_Call]
+				call[kHook_SetLockInfo_Call]
 				pushad
 				call Hook_SetLockInfo
 				popad
-			END_ASM(Hook_SetLockInfo);
+				END_ASM(Hook_SetLockInfo);
 		}
 	}
 };
@@ -1148,7 +1148,7 @@ public:
 		{
 			((void(__cdecl*)(FxDelegateArgs*))0x00887A10)(pargs);
 		}
-		else if(!(sleepWaitMenu->flags & IMenu::kType_PauseGame))
+		else if (!(sleepWaitMenu->flags & IMenu::kType_PauseGame))
 		{
 			sleepWaitMenu->flags |= IMenu::kType_PauseGame;
 			WaitSleepUpdater::Register();
@@ -1271,7 +1271,7 @@ public:
 		DEFINE_MEMBER_FN(RemoveStandardItemData, void, 0x008431F0, TESForm*& removedForm);
 
 		//__cdecl GetInventoryEntryData_Begin sub_47E480(a3, &v10); a3: TESObjectRefr v10: InventoryEntryData*
-	}; 
+	};
 
 	struct CarryWeightData //for follower,to calculate actual item count follower can burden.
 	{
@@ -1364,7 +1364,7 @@ public:
 		bool direction = pargs->args[1].GetBool();
 		ContainerMenuEx* containerMenu = static_cast<ContainerMenuEx*>(pargs->pThisMenu);
 
-		static auto fnTransferItems = [](FxDelegateArgs* pargs) 
+		static auto fnTransferItems = [](FxDelegateArgs* pargs)
 		{
 			if (pargs->pThisMenu != nullptr)
 			{
@@ -1884,8 +1884,8 @@ void UICallBack_ExecuteCommand(FxDelegateArgs* pargs)
 					void* cell = GetInteriorCell(destination.c_str());
 					if (!cell)
 					{
-						SInt16 x = 0;
-						UInt16 y = 0;
+						thread_local SInt16 x = 0;
+						thread_local UInt16 y = 0;
 						TESDataHandler* pDataHandler = TESDataHandler::GetSingleton();//The next codes are too slow...
 						void* worldSpace = pDataHandler->GetSpaceData(destination.c_str(), x, y);
 						if (worldSpace != nullptr)
@@ -1972,45 +1972,45 @@ void Hook_Game_Commit()
 		static const UInt32 kHook_GetFavoritesSpell_Jmp = 0x85BA03;
 
 		START_ASM(Hook_GetFavoritesSpell, 0x0085B919, 0x0085B921, 1);
-			push eax
+		push eax
 			call Hook_GetFavoritesItem
 			test eax, eax
 			je InvalidSpell
 			JMP_ASM(Hook_GetFavoritesSpell)
 			InvalidSpell:
-			jmp [kHook_GetFavoritesSpell_Jmp]
-		END_ASM(Hook_GetFavoritesSpell);
+		jmp[kHook_GetFavoritesSpell_Jmp]
+			END_ASM(Hook_GetFavoritesSpell);
 	}
 
 	{
 		static const UInt32 kHook_GetFavoritesItem_Jmp = 0x85BB34;
 
 		START_ASM(Hook_GetFavoritesItem, 0x0085BA52, 0x0085BA5A, 1);
-			push eax
+		push eax
 			call Hook_GetFavoritesItem
 			test eax, eax
 			je InvalidItem
 			JMP_ASM(Hook_GetFavoritesItem)
 			InvalidItem:
-			jmp [kHook_GetFavoritesItem_Jmp]
-		END_ASM(Hook_GetFavoritesItem);
+		jmp[kHook_GetFavoritesItem_Jmp]
+			END_ASM(Hook_GetFavoritesItem);
 	}
 
 	{
 		START_ASM(Hook_KillActor, 0x006AC3A0, 0x006AC3A9, 1);
-			push ecx
+		push ecx
 			push ecx
 			call Hook_KillActor
 			pop ecx
 			push esi
 			mov esi, ecx
 			mov ecx, [esi + 0x88]
-		END_ASM(Hook_KillActor);
+			END_ASM(Hook_KillActor);
 	}
 
 	{
 		START_ASM(Hook_AddUIMessage, 0x00431B00, 0x00431B0A, 1);
-			push ecx
+		push ecx
 			mov eax, [esp + 0xC]
 			push eax
 			mov eax, [esp + 0xC]
@@ -2021,34 +2021,34 @@ void Hook_Game_Commit()
 			jnz Continue
 			retn 0xC
 			Continue:
-			push ecx
+		push ecx
 			push esi
 			mov esi, ecx
 			mov eax, [esi + 0x1C8]
-		END_ASM(Hook_AddUIMessage);
+			END_ASM(Hook_AddUIMessage);
 	}
 
 	{
 		START_ASM(Hook_RequstAutoSave, 0x00681770, 0x00681776, 1);
-			push ecx
+		push ecx
 			mov eax, MenuOpenCloseEventHandler::unpausedCount
 			cmp eax, 0
 			jz	ContinueSave
 			pop ecx
 			retn
-			ContinueSave:
-			pop ecx
+			ContinueSave :
+		pop ecx
 			sub esp, 0x104
-		END_ASM(Hook_RequstAutoSave)
+			END_ASM(Hook_RequstAutoSave)
 	}
 
 	{
 		static const UInt32 kHook_DisableTimeUpdate_Jmp = 0x008D41F8;
 
-		START_ASM(Hook_VMUpdateTime, 0x008D41E9, 0x008D41F2, 1);		
-			push eax
+		START_ASM(Hook_VMUpdateTime, 0x008D41E9, 0x008D41F2, 1);
+		push eax
 			mov eax, 0x01B2E85E
-			movzx eax, byte ptr [eax]
+			movzx eax, byte ptr[eax]
 			cmp eax, 0
 			pop eax
 			jnz DisableUpdate
@@ -2056,8 +2056,8 @@ void Hook_Game_Commit()
 			jnz DisableUpdate
 			JMP_ASM(Hook_VMUpdateTime)
 			DisableUpdate:
-			jmp [kHook_DisableTimeUpdate_Jmp]	
-		END_ASM(Hook_VMUpdateTime)
+		jmp[kHook_DisableTimeUpdate_Jmp]
+			END_ASM(Hook_VMUpdateTime)
 	}
 }
 
@@ -2065,5 +2065,5 @@ void Hook_Game_Commit()
 /*
 13105D8 DialogueManager
 
-85ABC0 
+85ABC0
 */
