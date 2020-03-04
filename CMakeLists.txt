@@ -1,5 +1,7 @@
 cmake_minimum_required(VERSION 3.15)
-project(SkyrimSouls LANGUAGES CXX)
+if ("${CMAKE_PROJECT_NAME}" STREQUAL "")
+  project(SkyrimSouls LANGUAGES CXX)
+endif()
 
 file(GLOB_RECURSE SkyrimSoulsSrc "${CMAKE_CURRENT_LIST_DIR}/SkyrimSouls/*")
 file(GLOB_RECURSE SkyrimSrc "${CMAKE_CURRENT_LIST_DIR}/Skyrim/*")
